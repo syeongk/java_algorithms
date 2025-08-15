@@ -1,1 +1,1 @@
-# algorithm_java
+# java_algorithms
