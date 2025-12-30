@@ -5,36 +5,36 @@ import java.io.InputStreamReader;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int N = Integer.parseInt(br.readLine());
+
         int ans = 0;
 
-        for (int i = 0; i < N; i++) {
+        for (int i=0; i<N; i++) {
             String word = br.readLine();
 
-            boolean[] seen = new boolean[26];
+            char cur = word.charAt(0);
+            char prev = word.charAt(0);
+
             boolean isGroup = true;
 
-            char prev = word.charAt(0);
-            seen[prev - 'a'] = true;
+            boolean[] seen = new boolean[26];
+            seen[cur - 'a'] = true;
 
-            for (int j = 1; j < word.length(); j++) {
-                char cur = word.charAt(j);
+            for (int j=1; j<word.length(); j++) {
+                cur = word.charAt(j);
 
-                // 이전 문자와 달라졌을 때만 체크
-                if (cur != prev) {
+                if (prev != cur) {
                     if (seen[cur - 'a']) {
                         isGroup = false;
                         break;
                     }
-                    seen[cur - 'a'] = true;
                 }
                 prev = cur;
-            }
 
+                seen[cur - 'a'] = true;
+            }
             if (isGroup) ans++;
         }
-
         System.out.println(ans);
     }
 }
